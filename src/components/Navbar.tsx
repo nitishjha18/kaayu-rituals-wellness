@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 
@@ -10,17 +10,10 @@ const collections = [
 ];
 
 const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
-  const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<number>();
   const location = useLocation();
   const { openCart, count } = useCart();
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleDropdownEnter = () => {
     clearTimeout(dropdownTimeout.current);
@@ -34,7 +27,7 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className={`sticky top-0 z-[1000] bg-kaayu-bg transition-shadow duration-300 ${scrolled ? 'shadow-[0_2px_8px_rgba(24,90,66,0.08)]' : ''}`}>
+    <nav className="relative z-[1000] bg-white border-b border-gray-100">
       <div className="kaayu-container flex items-center justify-between h-[72px]">
         {/* LEFT NAV */}
         <div className="flex items-center gap-8" style={{ fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 500 }}>
@@ -52,8 +45,8 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
               </svg>
             </button>
             {/* Dropdown */}
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-kaayu-bg border-t-2 border-kaayu-accent pt-6 pb-8 px-8 transition-all duration-200 ${dropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
-              style={{ boxShadow: 'var(--shadow-hover)' }}>
+            <div className={`absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white border-t-2 border-kaayu-accent pt-6 pb-8 px-8 transition-all duration-200 ${dropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+              style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.12)', zIndex: 9999 }}>
               <div className="grid grid-cols-4 gap-6">
                 {collections.map(c => (
                   <Link key={c.slug} to={`/collection/${c.slug}`}

@@ -14,11 +14,11 @@
     --color-olive-hex: #5b7d40;
     --color-meadow: 143 33% 52%;
     --color-meadow-hex: #62a770;
-    --color-bg: 40 100% 89%;
-    --color-bg-hex: #fff1d3;
+    --color-bg: 0 0% 100%;
+    --color-bg-hex: #ffffff;
     --color-surface: 0 0% 100%;
-    --color-text: 141 28% 14%;
-    --color-text-hex: #1a2e1f;
+    --color-text: 0 0% 0%;
+    --color-text-hex: #000000;
 
     --background: var(--color-bg);
     --foreground: var(--color-text);
